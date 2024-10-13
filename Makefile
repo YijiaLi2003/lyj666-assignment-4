@@ -1,4 +1,5 @@
 install:
+	rm -rf venv
 	pip install --upgrade pip
 	pip install virtualenv
 	virtualenv venv
