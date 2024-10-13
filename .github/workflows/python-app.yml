@@ -19,16 +19,6 @@ jobs:
         with:
           python-version: '3.8'
 
-      - name: Check Python Versions
-        run: |
-          which python
-          which python3
-          python --version
-          python3 --version
-
-      - name: Install python3-venv
-        run: sudo apt-get update && sudo apt-get install -y python3-venv
-
       - name: Install dependencies
         run: make install
 
