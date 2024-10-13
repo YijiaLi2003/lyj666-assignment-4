@@ -2,7 +2,7 @@ name: Python application
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]  # Adjust this to your default branch
   pull_request:
     branches: [ main ]
 
@@ -19,13 +19,24 @@ jobs:
         with:
           python-version: '3.8'
 
+      - name: Check Python Versions
+        run: |
+          which python
+          which python3
+          python --version
+          python3 --version
+
+      - name: Check venv Module
+        run: |
+          python -c "import venv; print('venv module is available')"
+
       - name: Install dependencies
         run: make install
 
       - name: Start the application
         run: |
           make run &
-          sleep 10
+          sleep 10  # Wait for the server to start
 
       - name: Test server response
         run: |
