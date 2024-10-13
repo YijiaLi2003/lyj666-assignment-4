@@ -2,39 +2,35 @@ name: Python application
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.8'
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
 
-    - name: Install dependencies
-      run: |
-        make install
+      - name: Install dependencies
+        run: make install
 
-    - name: Start the application
-      run: |
-        make run &
-        sleep 10  # Wait for the server to start
+      - name: Start the application
+        run: |
+          make run &
+          sleep 10
 
-    # Optional: Test server response
-    - name: Test server response
-      run: |
-        curl --fail http://localhost:3000 || exit 1
+      - name: Test server response
+        run: |
+          curl --fail http://localhost:3000 || exit 1
 
-    # Optional: Stop the server (if necessary)
-    - name: Stop the server
-      run: |
-        pkill -f 'flask run'
+      - name: Stop the server
+        run: |
+          pkill -f 'flask run'
